@@ -1,15 +1,18 @@
 import React from 'react';
-import './App.css';
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <div className='container'>
-        <h1>
-          Hello
-        </h1>
-      </div>
+      <html>
+      <head>
+        <title>Bootstrap Example</title>
+        </head>
+    <body>
+    <div className='App'>
+        <Navbar/>
     </div>
+    </body>
+</html>
   );
 }
 
