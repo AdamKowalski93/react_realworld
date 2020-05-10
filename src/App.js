@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from "./components/Navbar/Navbar";
+import SignIn from "./components/SignIn/SignIn"
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     <body>
     <div className='App'>
         <Navbar/>
+        <SignIn/>
     </div>
     </body>
 </html>
