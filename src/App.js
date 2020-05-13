@@ -1,12 +1,8 @@
 import React from 'react';
-import Navbar from "./components/Navbar/Navbar";
 import SignInForm from "./components/SignIn/SignIn";
 import Home from "./components/Home/Home";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter,Route, Switch } from 'react-router-dom';
 
 
 function App() {
@@ -16,16 +12,15 @@ function App() {
         <title>Bootstrap Example</title>
         </head>
     <body>
-    <Router>
-    <div className='App'>
-        <Navbar/>
-        <Switch>
-            <Route patch='/' exact component={Home}/>
-            <Route patch='/sign' component={SignInForm}/>
-        </Switch>
-
-    </div>
-    </Router>
+    <BrowserRouter>
+        <div className="App">
+            <Navbar/>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/sign" component={SignInForm} />
+            </Switch>
+        </div>
+    </BrowserRouter>
     </body>
 </html>
   );
