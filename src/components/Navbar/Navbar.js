@@ -1,36 +1,44 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Link} from "react-router-dom";
 
 class Navbar extends React.Component {
 
     NavbarBrand() {
-        return <a className="navbar-brand text-white" href="#">Conduit</a>
-        }
+        return <p className="navbar-brand text-white">Conduit</p>
+    }
 
-     NavbarCollapse(){
+    NavbarCollapse() {
         return <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+
             <ul className="navbar-nav">
-                <li className="nav-item inactive">
-                    <a className="nav-link text-white" href="#">Home</a>
+                <li className="nav-item">
+                    <Link to="/" className="nav-link text-white">
+                        Home
+                    </Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link text-white" href="#">Sign in</a>
+                    <Link to="/sign" className="nav-link text-white">
+                        Sign In
+                    </Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link text-white" href="#">sign out</a>
+                    <Link to="/signout" className="nav-link text-white">
+                        Sign out
+                    </Link>
                 </li>
             </ul>
         </div>
-     }
+    }
 
     render() {
-        return(
-                <nav className="navbar navbar-expand-lg navbar-light bg-success">
-                    <div className="container">
+        return (
+            <nav className="navbar navbar-expand-lg navbar-light bg-success">
+                <div className="container">
                     {this.NavbarBrand()}
                     {this.NavbarCollapse()}
-                    </div>
-                </nav>
+                </div>
+            </nav>
         )
     }
 }

@@ -1,6 +1,9 @@
 import React from 'react';
+import SignInForm from "./components/SignIn/SignIn";
+import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
-import SignIn from "./components/SignIn/SignIn"
+import { BrowserRouter,Route, Switch } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -9,10 +12,15 @@ function App() {
         <title>Bootstrap Example</title>
         </head>
     <body>
-    <div className='App'>
-        <Navbar/>
-        <SignIn/>
-    </div>
+    <BrowserRouter>
+        <div className="App">
+            <Navbar/>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/sign" component={SignInForm} />
+            </Switch>
+        </div>
+    </BrowserRouter>
     </body>
 </html>
   );
