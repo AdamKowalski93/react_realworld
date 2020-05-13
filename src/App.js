@@ -1,6 +1,13 @@
 import React from 'react';
 import Navbar from "./components/Navbar/Navbar";
-import SignIn from "./components/SignIn/SignIn"
+import SignInForm from "./components/SignIn/SignIn";
+import Home from "./components/Home/Home";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+
 
 function App() {
   return (
@@ -9,10 +16,16 @@ function App() {
         <title>Bootstrap Example</title>
         </head>
     <body>
+    <Router>
     <div className='App'>
         <Navbar/>
-        <SignIn/>
+        <Switch>
+            <Route patch='/' exact component={Home}/>
+            <Route patch='/sign' component={SignInForm}/>
+        </Switch>
+
     </div>
+    </Router>
     </body>
 </html>
   );
