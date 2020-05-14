@@ -23,7 +23,7 @@ class Navbar extends React.Component {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/signout" className="nav-link text-white">
+                    <Link to="/signup" className="nav-link text-white">
                         Sign out
                     </Link>
                 </li>
