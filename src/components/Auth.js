@@ -3,19 +3,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 
 
-class Home extends React.Component{
+class Auth extends React.Component{
 
     constructor(props) {
         super(props);
+        this.state={
+            user:''
+        }
     }
+
 
     render() {
         return(
-            <div>
-                <h1>Home Page</h1>
-            </div>
+            <div></div>
         )
     }
 }
 
-export default Home
+export default Auth

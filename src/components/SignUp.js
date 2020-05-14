@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from "axios";
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -15,8 +16,24 @@ class SignUpForm extends React.Component {
     }
 
     onSubmit(e) {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+
+        let data ={
+            "user": {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            }}
+
         e.preventDefault()
+        Axios.post(
+            'https://conduit.productionready.io/api/users/',data,config).then(res => localStorage.setItem('cool-jwt',res.data))
         console.log(this.state)
+        console.log()
     }
 
     render() {
