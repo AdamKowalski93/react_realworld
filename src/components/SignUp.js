@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from "axios";
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -6,7 +7,7 @@ class SignUpForm extends React.Component {
         this.state = {
             username: '',
             email: '',
-            password:''
+            password: ''
         }
     }
 
@@ -15,8 +16,29 @@ class SignUpForm extends React.Component {
     }
 
     onSubmit(e) {
+
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+
+        let data = {
+            "user": {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            }
+        }
+        // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
+        let post_jwt_token= Axios.post('https://conduit.productionready.io/api/users/',data,config).then(res => localStorage.setItem('login_parameters',JSON.stringify(res.data)))
+        console.log()
         e.preventDefault()
-        console.log(this.state)
+        if (post_jwt_token) {
+            this.props.history.push('/')
+        } else {
+            this.props.history.push('/sign')
+        }
     }
 
     render() {
