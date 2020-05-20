@@ -14,7 +14,8 @@ function App() {
             </head>
             <body>
             <BrowserRouter>
-                <div className="App">
+
+                <div className="App" class='container'>
                     <Navbar/>
                     <Switch>
                         <Route exact path="/" component={Home}/>
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/signup" component={SignUpForm} />
                     </Switch>
                 </div>
+
             </BrowserRouter>
             </body>
       </html>

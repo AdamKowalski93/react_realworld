@@ -9,7 +9,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             'isToken': false,
-            'Token' : ''
+            'Token': ''
         }
 
     }
@@ -17,7 +17,7 @@ class Home extends React.Component {
     componentDidMount() {
         let jwt_Token = JSON.parse(localStorage.getItem('login_parameters'))
         if (jwt_Token) {
-            this.setState({'isToken': true,'Token':jwt_Token.user.token})
+            this.setState({'isToken': true, 'Token': jwt_Token.user.token})
         }
 
     }
@@ -25,11 +25,34 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-
-                {this.state.isToken ? <Articles Token={this.state.Token}/> : <p>Nalezy sie zalogowac</p>
-                }
+            <div className='container'>
+                <div className="row">
+                    <div className="col-md-12 ">
+                        <div className="jumbotron bg-success" >
+                            <h1 class="text-white text-center font-weight-bold">
+                               Conduit
+                            </h1>
+                            <p class="text-white text-center">
+                                A place to share your knowledge.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-8">
+                        {this.state.isToken ? <Articles Token={this.state.Token}/> : <p>Nalezy sie zalogowac</p>
+                        }
+                    </div>
+                    <div className="col-md-4">
+                        <div className="card text-white bg-secondary bg-light mb-3">
+                            <div className="card-body">
+                                <span className="badge badge-pill badge-secondary">Secondary</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         )
     }
 }
