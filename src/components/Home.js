@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Articles from "./Articles";
+import Tags from "./Tags";
+import {get_jwt} from "./guardians/Auth"
 
 
 class Home extends React.Component {
@@ -8,31 +10,21 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'isToken': false,
-            'Token': ''
+            'Token': get_jwt()
         }
 
     }
-
-    componentDidMount() {
-        let jwt_Token = JSON.parse(localStorage.getItem('login_parameters'))
-        if (jwt_Token) {
-            this.setState({'isToken': true, 'Token': jwt_Token.user.token})
-        }
-
-    }
-
 
     render() {
         return (
             <div className='container'>
                 <div className="row">
                     <div className="col-md-12 ">
-                        <div className="jumbotron bg-success" >
-                            <h1 class="text-white text-center font-weight-bold">
-                               Conduit
+                        <div className="jumbotron bg-success">
+                            <h1 className="text-white text-center font-weight-bold">
+                                Conduit
                             </h1>
-                            <p class="text-white text-center">
+                            <p className="text-white text-center">
                                 A place to share your knowledge.
                             </p>
                         </div>
@@ -40,15 +32,10 @@ class Home extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-8">
-                        {this.state.isToken ? <Articles Token={this.state.Token}/> : <p>Nalezy sie zalogowac</p>
-                        }
+                        <Articles Token={this.state.Token}/>
                     </div>
                     <div className="col-md-4">
-                        <div className="card text-white bg-secondary bg-light mb-3">
-                            <div className="card-body">
-                                <span className="badge badge-pill badge-secondary">Secondary</span>
-                            </div>
-                        </div>
+                        <Tags Token={this.state.Token}/>
                     </div>
                 </div>
             </div>

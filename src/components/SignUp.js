@@ -31,14 +31,10 @@ class SignUpForm extends React.Component {
             }
         }
         // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
-        let post_jwt_token= Axios.post('https://conduit.productionready.io/api/users/',data,config).then(res => localStorage.setItem('login_parameters',JSON.stringify(res.data)))
-        console.log()
+        Axios.post('https://conduit.productionready.io/api/users/',data,config).then(this.props.history.push('/'))
+
         e.preventDefault()
-        if (post_jwt_token) {
-            this.props.history.push('/')
-        } else {
-            this.props.history.push('/sign')
-        }
+
     }
 
     render() {
