@@ -2,7 +2,6 @@ import React from "react";
 import Axios from "axios";
 
 
-
 class Articles extends React.Component {
 
     constructor(props) {
@@ -32,21 +31,31 @@ class Articles extends React.Component {
     }
 
 
-
-
     render() {
 
         return (
             <div className="card border">
                 {this.state.Articles.map((article, index) => (
-                    <div className="card">
-                        <div className="card-body">
-                            <h4 className="card-header-pills">User Name: {article.author.username}</h4>
-                            <h5 className="card-title">Title: {article.title}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">Description: {article.description}</h6>
-                            <p className="card-text" key={index}>{article.body}</p>
+                        <div className="card mb-8">
+                            <div className="row no-gutters">
+                                <div className="col-md-4">
+                                    <img src={article.author.image} className="card-img" alt="..."/>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body">
+                                        <h5 className="card-title">{article.title}</h5>
+                                        <p className="card-text">{article.body}</p>
+                                        <p className="card-text"><small className="text-muted">Created at
+                                            :{article.createdAt}</small></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>))}</div>)
+                    )
+                )
+                }
+            </div>
+        )
     }
 }
 
