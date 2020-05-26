@@ -31,7 +31,7 @@ class SignUpForm extends React.Component {
             }
         }
         // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
-        Axios.post('https://conduit.productionready.io/api/users/',data,config).then(this.props.history.push('/'))
+        Axios.post('https://conduit.productionready.io/api/users/',data,config).then(() =>this.props.history.push('/'))
 
         e.preventDefault()
 

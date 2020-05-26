@@ -18,7 +18,9 @@ class SignInForm extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    onSubmit(e) {
+
+    async onSubmit(e) {
+        e.preventDefault()
         let config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -32,9 +34,16 @@ class SignInForm extends React.Component {
             }
         }
         // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
-        let jwt = Axios.post('https://conduit.productionready.io/api/users/login', data, config).then(res => localStorage.setItem('login_parameters', JSON.stringify(res.data)))
-        this.setState({'Token': jwt})
-        e.preventDefault()
+        const response = await Axios.post('https://conduit.productionready.io/api/users/login', data, config)
+        console.log(response)
+        localStorage.setItem('login_parameters', JSON.stringify(response.data))
+        this.setState({Token: response.data}, () => {
+            console.log(this.state);
+            this.props.history.push('/')})
+
+
+
+
 
 
     }
