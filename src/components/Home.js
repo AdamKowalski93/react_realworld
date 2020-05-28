@@ -10,9 +10,17 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token': get_jwt()
+            'Token': get_jwt(),
+            'Article_link':'https://conduit.productionready.io/api/articles'
         }
+        this.onChange_link = this.onChange_link.bind(this)
 
+    }
+
+    onChange_link(newLink)
+    {
+
+        this.setState({Article_link: newLink})
     }
 
     render() {
@@ -32,10 +40,10 @@ class Home extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-8">
-                        <Articles Token={this.state.Token}/>
+                        <Articles Token={this.state.Token} Link={this.state.Article_link} />
                     </div>
                     <div className="col-md-4">
-                        <Tags Token={this.state.Token}/>
+                        <Tags Token={this.state.Token} onClick={this.onChange_link}/>
                     </div>
                 </div>
             </div>

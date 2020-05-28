@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link} from "react-router-dom";
-
+import LogOut from "./LogOut";
 class Navbar extends React.Component {
 
 
@@ -13,6 +13,9 @@ class Navbar extends React.Component {
                         <a className="navbar-brand text-success">Conduit</a>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="navbar-nav ml-md-auto">
+                                <li className="nav-item  text-black-50">
+                                    <LogOut/>
+                                </li>
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link text-black-50">
                                         Home

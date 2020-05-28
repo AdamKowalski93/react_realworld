@@ -16,5 +16,9 @@ export function isAuthenticated(component) {
 
 export function get_jwt() {
     let jwt_Token = JSON.parse(localStorage.getItem('login_parameters'))
-    return jwt_Token.user.token
+    if (jwt_Token) {
+        return jwt_Token.user.token;
+    } else {
+        console.log('No Token');
+    }
 }

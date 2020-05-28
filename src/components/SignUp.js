@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import {withRouter} from "react-router-dom";
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class SignUpForm extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    onSubmit(e) {
+     async onSubmit(e) {
 
         let config = {
             headers: {
@@ -30,11 +31,12 @@ class SignUpForm extends React.Component {
                 password: this.state.password
             }
         }
-        // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
-        Axios.post('https://conduit.productionready.io/api/users/',data,config).then(() =>this.props.history.push('/'))
-
         e.preventDefault()
-
+         const response = await Axios.post('https://conduit.productionready.io/api/users/',data,config)
+         localStorage.setItem('login_parameters', JSON.stringify(response.data))
+         this.setState({Token: response.data}, () => {
+             console.log(this.state);
+             this.props.history.push('/')})
     }
 
     render() {
@@ -93,5 +95,4 @@ class SignUpForm extends React.Component {
         )
     }
 }
-
-export default SignUpForm
+export default withRouter( SignUpForm)

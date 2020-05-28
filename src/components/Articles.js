@@ -9,25 +9,36 @@ class Articles extends React.Component {
         this.state = {
             'Token': props.Token,
             'Articles': [],
-
+            'Link': 'https://conduit.productionready.io/api/articles'
         }
 
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.Link!==this.props.Link){
+            //Perform some operation here
+            this.setState({Link :nextProps.Link})
+            this.renderArticles()
+        }
+    }
+
     componentDidMount() {
+       this.renderArticles()
+    }
+
+    renderArticles()
+    {
         let config = {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.state.Token
             }
         }
-        // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
 
-        Axios.get('https://conduit.productionready.io/api/articles', config)
+        Axios.get(this.state.Link, config)
             .then(function (response) {
                 this.setState({Articles: response.data.articles});
             }.bind(this));
-
     }
 
 

@@ -33,7 +33,7 @@ class SignInForm extends React.Component {
                 password: this.state.password
             }
         }
-        // Promises posiada funkcje jak isFulfilled dopytac jak ich tu uzyc
+
         const response = await Axios.post('https://conduit.productionready.io/api/users/login', data, config)
         console.log(response)
         localStorage.setItem('login_parameters', JSON.stringify(response.data))
