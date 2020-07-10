@@ -1,13 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link, withRouter} from "react-router-dom";
-import {get_jwt} from "./guardians/Auth"
+import store from "../store";
 
 class LogOut extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token': get_jwt()
+            'Token':store.getState().token
         }
     }
 

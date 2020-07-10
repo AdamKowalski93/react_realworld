@@ -39,7 +39,7 @@ class Tags extends React.Component {
     render() {
         return (
             <div className="card text-white bg-secondary bg-light mb-3">
-                <button type="button" value="" className="btn btn-primary btn-sm mr-1 mt-1" onClick={this.onClick.bind(this)}>reset</button>
+                <button type="button btn-sm" className="btn btn-primary btn-sm mr-1 mt-1" onClick={this.onClick.bind(this)}>reset</button>
                 <div className="card-body">
                     {this.state.Tags.map((tag_string, index) => (
                         <button type="button"  key={index} value={'?tag='+tag_string} className="btn btn-primary btn-sm mr-1 mt-1" onClick={this.onClick.bind(this)}>{tag_string}</button>

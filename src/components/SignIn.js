@@ -2,6 +2,10 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Axios from "axios";
 import {withRouter} from "react-router-dom";
+import store from "../store";
+import add from "../actions/authActions";
+import remove_token from "../actions/authActions";
+import {connect} from "react-redux";
 
 class SignInForm extends React.Component {
     constructor(props) {
@@ -9,10 +13,13 @@ class SignInForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-            Token: ''
+            Token: store.getState().token
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({Token: nextProps})
+    }
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
@@ -37,16 +44,13 @@ class SignInForm extends React.Component {
         const response = await Axios.post('https://conduit.productionready.io/api/users/login', data, config)
         console.log(response)
         localStorage.setItem('login_parameters', JSON.stringify(response.data))
-        this.setState({Token: response.data}, () => {
-            console.log(this.state);
-            this.props.history.push('/')})
-
-
-
-
+        store.dispatch(add.add(response.data))
+        this.props.history.push('/')
 
 
     }
+
+
 
     render() {
         return (
@@ -94,4 +98,8 @@ class SignInForm extends React.Component {
     }
 }
 
+// function mapDispatchToProps(dispatch) {
+//     return {add.add(response.data)}};
+
 export default withRouter(SignInForm)
+// export default connect(mapDispatchToProps)(SignInForm);

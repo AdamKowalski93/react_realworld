@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Articles from "./Articles";
 import Tags from "./Tags";
-import {get_jwt} from "./guardians/Auth"
+import store from "../store";
 
 
 class Home extends React.Component {
@@ -10,7 +10,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token': get_jwt(),
+            'Token': store.getState().token,
             'Article_link':'https://conduit.productionready.io/api/articles'
         }
         this.onChange_link = this.onChange_link.bind(this)
