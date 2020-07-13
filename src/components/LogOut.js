@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link, withRouter} from "react-router-dom";
 import store from "../store";
+import remove_token from "../actions/authActions";
 
 class LogOut extends React.Component {
     constructor(props) {
@@ -11,15 +12,11 @@ class LogOut extends React.Component {
         }
     }
 
-
-
     async handleClick(e) {
         e.preventDefault()
         localStorage.removeItem('login_parameters')
-        this.setState({Token: ''}, () => {
-            console.log(this.state);
-            this.props.history.push('/sign')
-        })
+        store.dispatch(remove_token.remove_token())
+        this.props.history.push('/sign')
 
 
     }

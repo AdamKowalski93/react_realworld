@@ -36,10 +36,8 @@ class SignUpForm extends React.Component {
         e.preventDefault()
          const response = await Axios.post('https://conduit.productionready.io/api/users/',data,config)
          localStorage.setItem('login_parameters', JSON.stringify(response.data))
-         await store.dispatch(add.add(response.data))
-         // this.setState({Token: response.data}, () => {
-         //     console.log(this.state);
-         //     this.props.history.push('/')})
+         store.dispatch(add.add(response.data.user.token))
+         this.props.history.push('/')
     }
 
     render() {

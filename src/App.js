@@ -15,20 +15,21 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        // this.isAuthenticated=this.isAuthenticated.bind(this)
         this.state = {
-            'Token': store.getState().token
+            'Token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTA1MDEzLCJ1c2VybmFtZSI6InRlc3QwMjIyMDEiLCJleHAiOjE1OTk4MTMzMDd9.BoFc_X58IfNqjgqke6_6r1syFDopM4K3wRmVKk8kI1M'
         }
 
     }
 
-    isAuthenticated(component) {
-
-        if (this.state.Token) {
-            return component;
-        } else {
-            return <Redirect to="/sign"/>;
-        }
-    }
+    // isAuthenticated(component) {
+    //     console.log('auth:',component)
+    //     if (this.state.Token !== "") {
+    //         <Redirect to="/sign"/>
+    //     } else {
+    //         return <Redirect to="/sign"/>;
+    //     }
+    // }
 
     componentWillReceiveProps(nextProps) {
         this.setState({Token: nextProps})
@@ -45,7 +46,7 @@ class App extends React.Component {
                 <div className='container'>
                     <Navbar/>
                     <Switch>
-                        <Route exact path="/" render={() => this.isAuthenticated(this.state.Token,<Home/>)}/>
+                        <Route exact path="/" component={Home}/>
                         <Route exact path="/sign" component={SignInForm}/>
                         <Route exact path="/signup" component={SignUpForm}/>
                     </Switch>

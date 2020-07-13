@@ -1,5 +1,9 @@
 import React from "react";
 import Axios from "axios";
+import store from "../store";
+import articleActions from "../actions/articleActions";
+import {connect} from "react-redux";
+import types from "../constans/types";
 
 
 class Articles extends React.Component {
@@ -7,27 +11,27 @@ class Articles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token': props.Token,
-            'Articles': [],
+            'Token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTA1MDEzLCJ1c2VybmFtZSI6InRlc3QwMjIyMDEiLCJleHAiOjE1OTk4MTMzMDd9.BoFc_X58IfNqjgqke6_6r1syFDopM4K3wRmVKk8kI1M',
             'Link': 'https://conduit.productionready.io/api/articles'
         }
+
 
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.Link!==this.props.Link){
+
+        if (nextProps.Link !== this.props.Link) {
             //Perform some operation here
-            this.setState({Link :nextProps.Link})
+            this.setState({Link: nextProps.Link})
             this.renderArticles()
         }
     }
 
     componentDidMount() {
-       this.renderArticles()
+        this.renderArticles()
     }
 
-    renderArticles()
-    {
+    renderArticles() {
         let config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -35,19 +39,22 @@ class Articles extends React.Component {
             }
         }
 
-        Axios.get(this.state.Link, config)
-            .then(function (response) {
+        Axios.get(this.state.Link, config).then(
+            function (response) {
                 this.setState({Articles: response.data.articles});
+                this.props.UPDATE_ARTICLES(response.data.articles)
+
             }.bind(this));
+
     }
 
 
     render() {
-
+        console.log('article_list:', this.props.siema)
         return (
             <div className="card border">
-                {this.state.Articles.map((article, index) => (
-                        <div className="card mb-8">
+                {this.props.siema.Articles.map((article, index) => (
+                        <div className="card mb-8" key={index}>
                             <div className="row no-gutters">
                                 <div className="col-md-4">
                                     <img src={article.author.image} className="card-img" alt="..."/>
@@ -70,4 +77,17 @@ class Articles extends React.Component {
     }
 }
 
-export default Articles
+
+function mapDispatchToProps(dispatch) {
+    return {
+        UPDATE_ARTICLES: (payload) => {
+             dispatch({type:types.ADD_ARTICLES, item:payload})
+        }
+    }
+}
+
+function mapStateToProps(state) {
+    return {siema: state.articles_list};
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Articles);

@@ -10,7 +10,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token': store.getState().token,
+            'Token': store.getState().auth.token,
             'Article_link':'https://conduit.productionready.io/api/articles'
         }
         this.onChange_link = this.onChange_link.bind(this)
