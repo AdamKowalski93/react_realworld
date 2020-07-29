@@ -8,7 +8,7 @@ const add = item => (
 
 const remove_token = () => (
     {
-        type:types.REMOVE_TOKEN
+        type:types.REMOVE_TOKEN,
     }
 )
 

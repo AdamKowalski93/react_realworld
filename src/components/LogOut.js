@@ -3,22 +3,22 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Link, withRouter} from "react-router-dom";
 import store from "../store";
 import remove_token from "../actions/authActions";
+import types from "../constans/types";
+import {connect} from "react-redux";
 
 class LogOut extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token':store.getState().token
+            'Token': ''
         }
     }
 
     async handleClick(e) {
         e.preventDefault()
         localStorage.removeItem('login_parameters')
-        store.dispatch(remove_token.remove_token())
+        this.props.REMOVE_TOKEN()
         this.props.history.push('/sign')
-
-
     }
 
     render() {
@@ -33,4 +33,16 @@ class LogOut extends React.Component {
     }
 }
 
-export default withRouter(LogOut)
+function mapStateToProps(state) {
+    return {auth: state.token};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        REMOVE_TOKEN: () => {
+            dispatch({type: types.REMOVE_TOKEN})
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(LogOut);

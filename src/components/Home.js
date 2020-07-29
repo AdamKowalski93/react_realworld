@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Articles from "./Articles";
 import Tags from "./Tags";
 import store from "../store";
+import {connect} from "react-redux";
 
 
 class Home extends React.Component {
@@ -10,11 +11,26 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'Token': store.getState().auth.token,
+            'Token': "",
             'Article_link':'https://conduit.productionready.io/api/articles'
         }
         this.onChange_link = this.onChange_link.bind(this)
+        this.checkAuth = this.checkAuth.bind(this)
 
+    }
+
+    checkAuth()
+    {
+       if(this.props.auth == null)
+       {
+           console.log('redirect to sign')
+           this.props.history.push('/sign')
+       }
+    }
+
+    componentDidMount() {
+        this.checkAuth()
+        this.setState({Token:store.getState().auth.token_value})
     }
 
     onChange_link(newLink)
@@ -39,6 +55,7 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className="row">
+
                     <div className="col-md-8">
                         <Articles Token={this.state.Token} Link={this.state.Article_link} />
                     </div>
@@ -52,4 +69,8 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+function mapStateToProps(state) {
+    return {auth: state.auth.token};
+}
+
+export default connect(mapStateToProps,null)(Home);
