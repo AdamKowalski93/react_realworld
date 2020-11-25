@@ -3,6 +3,8 @@ import Axios from "axios";
 import {withRouter} from "react-router-dom";
 import store from "../store";
 import add from "../actions/authActions";
+import types from "../constans/types";
+import {connect} from "react-redux";
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -36,7 +38,7 @@ class SignUpForm extends React.Component {
         e.preventDefault()
          const response = await Axios.post('https://conduit.productionready.io/api/users/',data,config)
          localStorage.setItem('login_parameters', JSON.stringify(response.data))
-         store.dispatch(add.add(response.data.user.token))
+         this.props.UPDATE_TOKEN(response.data.user.token)
          this.props.history.push('/')
     }
 
@@ -96,4 +98,15 @@ class SignUpForm extends React.Component {
         )
     }
 }
-export default withRouter( SignUpForm)
+function mapStateToProps(state) {
+    return {auth: state.token};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        UPDATE_TOKEN: (payload) => {
+            dispatch({type: types.ADD_TOKEN,item:payload})
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SignUpForm));

@@ -4,7 +4,7 @@ import types from "../constans/types";
 
 const INITIAL_STATE = {
     token: null,
-    token_value: null
+    token_value: null,
 }
 
 

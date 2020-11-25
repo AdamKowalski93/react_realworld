@@ -26,7 +26,7 @@ class App extends React.Component {
             <body>
             <BrowserRouter>
                 <div className='container'>
-                    <Navbar/>
+                    <Route component={Navbar}/>
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/sign" component={SignInForm}/>

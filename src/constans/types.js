@@ -4,6 +4,7 @@
  const REMOVE_ARTICLES='REMOVE_ARTICLES'
  const ADD_TAGS='ADD_TAGS'
  const REMOVE_TAGS='REMOVE_TAGS'
+ const LOG_IN= 'LOG_IN'
 
  export default
  {
@@ -12,6 +13,7 @@
   ADD_ARTICLES,
   REMOVE_ARTICLES,
   ADD_TAGS,
-  REMOVE_TAGS
+  REMOVE_TAGS,
+  LOG_IN
 
 }

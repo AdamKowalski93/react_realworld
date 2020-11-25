@@ -4,6 +4,7 @@ import Articles from "./Articles";
 import Tags from "./Tags";
 import store from "../store";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 
 class Home extends React.Component {
@@ -73,4 +74,4 @@ function mapStateToProps(state) {
     return {auth: state.auth.token};
 }
 
-export default connect(mapStateToProps,null)(Home);
+export default connect(mapStateToProps,null)(withRouter(Home));

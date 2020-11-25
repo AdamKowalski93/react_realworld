@@ -4,6 +4,9 @@ import Axios from "axios";
 import store from "../store";
 import {connect} from "react-redux";
 import types from "../constans/types";
+import {withRouter} from "react-router-dom";
+
+
 
 class SignInForm extends React.Component {
     constructor(props) {
@@ -22,6 +25,7 @@ class SignInForm extends React.Component {
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
+
     }
 
 
@@ -39,11 +43,11 @@ class SignInForm extends React.Component {
                 password: this.state.password
             }
         }
+        this.props.logInAction(data)
 
-        const response = await Axios.post('https://conduit.productionready.io/api/users/login', data, config)
-        console.log(response)
-        localStorage.setItem('login_parameters', JSON.stringify(response.data))
-        this.props.UPDATE_TOKEN(response.data.user.token)
+        // const response = await Axios.post('https://conduit.productionready.io/api/users/login', data, config)
+        // localStorage.setItem('login_parameters', JSON.stringify(response.data))
+        // this.props.UPDATE_TOKEN(response.data.user.token)
         this.props.history.push('/')
 
 
@@ -105,7 +109,10 @@ function mapDispatchToProps(dispatch) {
     return {
         UPDATE_TOKEN: (payload) => {
             dispatch({type: types.ADD_TOKEN,item:payload})
+        },
+        logInAction: (payload) => {
+            dispatch({type:types.LOG_IN,item:payload})
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(SignInForm);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SignInForm));
